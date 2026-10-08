@@ -1,10 +1,14 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+        lazy = false,
         build = ":TSUpdate",
         config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
+            -- deferred: calling require("nvim-treesitter").install() synchronously
+            -- here fails (module isn't fully ready yet during lazy.nvim's config step)
+            vim.schedule(function()
+                require("nvim-treesitter").install({
                     "lua",
                     "vim",
                     "vimdoc",
@@ -16,11 +20,25 @@ return {
                     "c",
                     "markdown",
                     "markdown_inline",
+                })
+            end)
+
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = {
+                    "lua",
+                    "vim",
+                    "vimdoc",
+                    "query",
+                    "javascript",
+                    "typescript",
+                    "rust",
+                    "java",
+                    "c",
+                    "markdown",
                 },
-                auto_install = true,
-                highlight = {
-                    enable = true,
-                },
+                callback = function()
+                    vim.treesitter.start()
+                end,
             })
         end,
     },
