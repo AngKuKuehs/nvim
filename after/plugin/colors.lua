@@ -14,6 +14,10 @@ function ColourMe(color)
     vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
     vim.cmd [[ highlight EndOfBuffer guifg=#6a6a76 ]]
 
+    -- nvim-tree sidebar: transparent like the editor pane
+    vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { bg = "none" })
+
     vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
     vim.api.nvim_set_hl(0, "DiagnosticSignError", { bg = "none" })
     vim.api.nvim_set_hl(0, "DiagnosticSignWarn",  { bg = "none" })
