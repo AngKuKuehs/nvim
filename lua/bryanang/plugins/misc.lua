@@ -8,4 +8,5 @@ return {
     },
     { "mbbill/undotree" },
     { "tpope/vim-fugitive" },
+    { "christoomey/vim-tmux-navigator" },
 }

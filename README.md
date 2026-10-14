@@ -12,6 +12,7 @@ Lazy.nvim-managed config. Entry point: `init.lua` -> `lua/bryanang/{remap,lazy}.
  - `rebelot/kanagawa.nvim` - colorscheme
  - `neovim/nvim-lspconfig` + `mason-org/mason.nvim` - LSP client/installer
  - `nvim-tree/nvim-tree.lua` - file explorer sidebar (replaces netrw)
+ - `christoomey/vim-tmux-navigator` - move between nvim splits and tmux panes with `<C-h/j/k/l>` (see tmux section below)
 
 ## LSPs
 Enabled via `vim.lsp.enable(...)` in `init.lua`, configured under `lsp/`:
@@ -42,6 +43,17 @@ Enabled via `vim.lsp.enable(...)` in `init.lua`, configured under `lsp/`:
 |---|---|
 | `<leader>e` | show line diagnostics in floating window |
 
+### tmux navigation (vim-tmux-navigator)
+Works in both directions when nvim runs inside tmux. Ctrl-h/j/k/l move between nvim splits and tmux panes, and leave nvim when the cursor is at the edge of the split.
+| key | action |
+|---|---|
+| `<C-h>` | move left (nvim split or tmux pane) |
+| `<C-j>` | move down |
+| `<C-k>` | move up |
+| `<C-l>` | move right |
+
+Needs the tmux side loaded through tpm in `~/.tmux.conf`. See `~/.tmux/README.md`.
+
 ### nvim-tree
 | key | action |
 |---|---|
@@ -59,10 +71,10 @@ Enabled via `vim.lsp.enable(...)` in `init.lua`, configured under `lsp/`:
 |---|---|
 | `<leader>a` | add current file to harpoon list |
 | `<C-e>` | toggle harpoon quick menu |
-| `<C-h>` | jump to harpoon file 1 |
-| `<C-t>` | jump to harpoon file 2 |
-| `<C-n>` | jump to harpoon file 3 |
-| `<C-s>` | jump to harpoon file 4 |
+| `<leader>1` | jump to harpoon file 1 |
+| `<leader>2` | jump to harpoon file 2 |
+| `<leader>3` | jump to harpoon file 3 |
+| `<leader>4` | jump to harpoon file 4 |
 
 ### undo-tree
 | key | action |
