@@ -58,6 +58,11 @@ Needs the tmux side loaded through tpm in `~/.tmux.conf`. See `~/.tmux/README.md
 | key | action |
 |---|---|
 | `<leader>pv` | toggle file explorer sidebar |
+| `a` | create file or directory (end with `/` for a directory, e.g. `foo/bar/` or `foo/bar/baz.lua`) |
+| `d` | delete file or directory (permanent, asks to confirm) |
+| `D` | move file or directory to trash |
+
+Keys are pressed with the cursor on the node inside the tree window. The tree buffer is read-only, so `<C-a>` (vim's normal-mode increment) and typing letters like `i`/`o` fail with `E21: Cannot make changes, 'modifiable' is off`. Use `a` to create instead.
 
 ### telescope (`<leader>p*`, `<leader>s`)
 | key | action |
