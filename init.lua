@@ -15,6 +15,9 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Get rid of highlights when searching upon <CR>
+vim.keymap.set('c', '<CR>', function() return vim.fn.getcmdtype():match('[/?]') and '<CR>:noh<CR>' or '<CR>' end, { expr = true })
+
 -- Use spaces instead of tabs
 vim.opt.expandtab = true
 
