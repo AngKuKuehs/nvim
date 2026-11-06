@@ -22,6 +22,28 @@ Lazy.nvim-managed config. Entry point: `init.lua` -> `lua/bryanang/{remap,lazy}.
 6. **Run `:checkhealth`** and fix anything it flags.
 7. **Learn the leader key.** `<Space>` is `<leader>`, so most custom mappings start with it. The [keybindings](#keybindings) section lists them all.
 
+## iterm2 setup
+
+Optional, macOS only. `iterm/Default.json` is my iTerm2 profile (font, colors, key mappings, and terminal settings), exported as a dynamic profile.
+
+1. **Install the font.** The profile uses JetBrainsMono Nerd Font Mono:
+   ```sh
+   brew install --cask font-jetbrains-mono-nerd-font
+   ```
+   Or download it from [nerdfonts.com](https://www.nerdfonts.com/).
+2. **Copy the profile into iTerm2's dynamic profiles folder:**
+   ```sh
+   mkdir -p "$HOME/Library/Application Support/iTerm2/DynamicProfiles"
+   cp ~/.config/nvim/iterm/Default.json "$HOME/Library/Application Support/iTerm2/DynamicProfiles/"
+   ```
+3. **Check that it loaded.** iTerm2 picks up dynamic profiles automatically. Open **Settings → Profiles** and look for "Default".
+4. **Make it your default.** Select the profile and click **Other Actions → Set as Default**.
+5. **Open a new iTerm2 window** so the profile applies.
+
+The profile sets the left Option key to send `Esc+`, which lets neovim see it as Meta. Mappings like `<M-c>` need this, so use left Option for them.
+
+See [`iterm/README.md`](iterm/README.md) for more detail.
+
 ## lazy.nvim basics
 
 [lazy.nvim](https://github.com/folke/lazy.nvim) is the plugin manager. It is bootstrapped in `lua/bryanang/lazy.lua`, and it loads every file under `lua/bryanang/plugins/` automatically.
