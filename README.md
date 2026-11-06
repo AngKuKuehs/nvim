@@ -2,6 +2,69 @@
 
 Lazy.nvim-managed config. Entry point: `init.lua` -> `lua/bryanang/{remap,lazy}.lua` -> `lua/bryanang/plugins/*.lua`.
 
+## get started
+
+1. **Install neovim 0.11 or newer.** The config uses `vim.lsp.enable` and `winborder`, which need 0.11+. Also make sure `git` is installed. Mason, which installs the LSP servers, needs `curl`, `unzip`, and `tar`.
+2. **Clone this repo to the neovim config path:**
+   ```sh
+   git clone https://github.com/AngKuKuehs/nvim.git ~/.config/nvim
+   ```
+   If you already have a config there, back it up first with `mv ~/.config/nvim ~/.config/nvim.bak`.
+3. **Start neovim.** `lazy.nvim` bootstraps itself on the first launch and installs every plugin. Wait for the install window to finish, then press `q` to close it.
+4. **Restart neovim** so treesitter parsers and plugin config load cleanly.
+5. **Install the LSP servers.** Run `:Mason`, then install the servers you need:
+   - `lua-language-server` (Lua)
+   - `pyright` (Python)
+   - `rust-analyzer` (Rust)
+   - `jdtls` (Java)
+
+   Open a file of each type and run `:LspInfo` to confirm the server attached.
+6. **Run `:checkhealth`** and fix anything it flags.
+7. **Learn the leader key.** `<Space>` is `<leader>`, so most custom mappings start with it. The [keybindings](#keybindings) section lists them all.
+
+## lazy.nvim basics
+
+[lazy.nvim](https://github.com/folke/lazy.nvim) is the plugin manager. It is bootstrapped in `lua/bryanang/lazy.lua`, and it loads every file under `lua/bryanang/plugins/` automatically.
+
+### common commands
+| command | action |
+|---|---|
+| `:Lazy` | open the lazy.nvim dashboard |
+| `:Lazy sync` | install missing plugins, update plugins, and remove unused ones |
+| `:Lazy update` | update plugins to the latest version |
+| `:Lazy restore` | roll plugins back to the commits pinned in `lazy-lock.json` |
+| `:Lazy clean` | remove plugins that are no longer in the config |
+| `:Lazy health` | check lazy.nvim's own setup |
+| `:Lazy profile` | show what slowed startup |
+
+### dashboard keys
+Inside the `:Lazy` window:
+| key | action |
+|---|---|
+| `I` | install missing plugins |
+| `U` | update plugins |
+| `S` | sync |
+| `C` | check for updates |
+| `X` | clean unused plugins |
+| `L` | show the log |
+| `<CR>` or `d` | show details for the plugin under the cursor |
+| `?` | show help |
+| `q` | close the window |
+
+### adding a plugin
+1. Add a spec to a file in `lua/bryanang/plugins/`. Each file returns a table of specs, for example:
+   ```lua
+   return {
+       { "owner/plugin-name" },
+       {
+           "owner/other-plugin",
+           opts = {},            -- passed to require("other-plugin").setup(opts)
+       },
+   }
+   ```
+2. Restart neovim, or run `:Lazy sync`.
+3. Commit the change together with the updated `lazy-lock.json`, so other machines get the same plugin versions.
+
 ## plugins
  - `nvim-cmp` - autocompletion (lsp, buffer, path, luasnip sources)
  - `nvim-treesitter` - syntax highlighting (lua, vim, vimdoc, query, javascript, typescript, rust, java, c, markdown)
