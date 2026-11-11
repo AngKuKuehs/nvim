@@ -93,6 +93,7 @@ Inside the `:Lazy` window:
  - `mbbill/undotree` - undo history visualizer
  - `ThePrimeagen/harpoon` (branch `harpoon2`) - quick file marking/jumping
  - `tpope/vim-fugitive` - git integration
+ - `lewis6991/gitsigns.nvim` - git change markers in the sign column, hunk preview, reset and blame
  - `nvim-telescope/telescope.nvim` - fuzzy finder
  - `rebelot/kanagawa.nvim` - colorscheme
  - `neovim/nvim-lspconfig` + `mason-org/mason.nvim` - LSP client/installer
@@ -171,10 +172,22 @@ Keys are pressed with the cursor on the node inside the tree window. The tree bu
 |---|---|
 | `<leader>u` | toggle undotree |
 
-### fugitive (git)
-| key | action |
-|---|---|
-| `<leader>gs` | open `:Git` status |
+### git (`<leader>g*`)
+A "hunk" is one block of changed lines, the same block gitsigns marks in the sign column. Hunk keys act on the hunk under the cursor.
+| key | action | plugin |
+|---|---|---|
+| `]h` | jump to next hunk (`]c` in a diff window) | gitsigns |
+| `[h` | jump to previous hunk (`[c` in a diff window) | gitsigns |
+| `<leader>gp` | preview hunk inline, showing the original lines | gitsigns |
+| `<leader>gu` | reset hunk to the committed version (`u` brings it back) | gitsigns |
+| `<leader>gb` | blame current line in a popup | gitsigns |
+| `<leader>gs` | open `:Git` status | fugitive |
+| `<leader>gd` | side-by-side diff of the file (`:Gvdiffsplit`) | fugitive |
+| `<leader>gB` | blame the whole file (`:Git blame`) | fugitive |
+
+Inside `:Gvdiffsplit`, `do` pulls a change from the other side and `dp` pushes it across.
+
+Sign column symbols: `▎` added or changed, `▁` lines deleted below, `▔` lines deleted above, `~` changed with lines deleted below, `┆` untracked file.
 
 ### completion (nvim-cmp, insert mode)
 | key | action |
