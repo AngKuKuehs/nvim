@@ -7,6 +7,9 @@ require("nvim-tree").setup({
         number = true,          -- absolute line numbers, same as the editor
         relativenumber = true,  -- relative numbers, same as the editor
     },
+    filters = {
+        git_ignored = false,    -- show gitignored files such as .env (default hides them)
+    },
 })
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle)
