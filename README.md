@@ -124,6 +124,38 @@ Enabled via `vim.lsp.enable(...)` in `init.lua`, configured under `lsp/`:
 | `<C-w>s` | split horizontally |
 | `<C-w>v` | split vertically |
 
+### lsp navigation (built-in)
+These work once a language server attaches. Neovim sets them up, so this config adds no mappings for them. If nothing happens, run `:checkhealth vim.lsp`.
+| key | action |
+|---|---|
+| `<C-]>` | jump to the definition of the symbol under the cursor |
+| `<C-o>` | jump back to the previous location (`<C-i>` goes forward) |
+| `grr` | list references (usages) in the quickfix list |
+| `gri` | jump to implementation (interfaces and traits) |
+| `grt` | jump to type definition |
+| `grn` | rename symbol |
+| `gra` | code actions |
+| `gO` | list symbols in the current file |
+
+`gd` is not LSP. It searches for the first match of the word in the current file, so it often lands in the wrong place.
+
+### quickfix list
+`grr` and other list commands fill the quickfix list.
+| key | action |
+|---|---|
+| `<CR>` | jump to the entry under the cursor (inside the list) |
+| `]q` / `[q` | go to the next/previous entry, from any window |
+| `:copen` / `:cclose` | open/close the list |
+
+### search
+| key | action |
+|---|---|
+| `/pattern` | search forward (`?pattern` searches backward) |
+| `n` / `N` | go to the next/previous match |
+| `*` / `#` | search forward/backward for the word under the cursor |
+
+The `<CR>` remap in `init.lua` runs `:noh` after a search. This hides the highlighting but keeps the pattern, so `n`/`N` still work and turn the highlighting back on.
+
 ### general remaps
 | key | action |
 |---|---|
